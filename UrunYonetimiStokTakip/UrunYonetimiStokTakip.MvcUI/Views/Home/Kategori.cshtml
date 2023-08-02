@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Entities.Urun>
+
+@{
+    ViewBag.Title = "Kategori";
+}
+
+<h2>Kategori</h2>
+
+<div class="container">
+
+    <div class="row text-center">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4">
+                <img src="~/Img/@item.Resim" alt="" height="100" />
+                <h2>@item.UrunAdi</h2>
+                <p>@item.Aciklama</p>
+                <p><a class="btn btn-secondary" href="/Home/UrunDetay/@item.Id">Detayını gör »</a></p>
+            </div>
+        }
+    </div>
+
+</div>

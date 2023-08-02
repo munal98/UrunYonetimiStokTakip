@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AnaSablon.master.cs" Inherits="UrunYonetimiStokTakip.WebFormUI.AnaSablon" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <style>
+        #menu { display: flex; align-content: center; justify-content: center; align-items: center; list-style: none; }
+            #menu li { border-right: 1px solid #F7F6F3; padding: 1rem; }
+                #menu li:last-child { border-right: none; }
+                #menu li:hover { background-color: #F7F6F3; }
+            #menu a { color: black; text-decoration: none; }
+                #menu a:hover { color: red }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div>
+            <ul id="menu">
+                <li><a href="/Admin/">Giriş</a></li>
+                <li><a href="/Admin/KategoriYonetimi.aspx">Kategori Yönetimi</a></li>
+                <li><a href="/Admin/KullaniciYonetimi.aspx">Kullanıcı Yönetimi</a></li>
+                <li><a href="/Admin/MarkaYonetimi.aspx">Marka Yönetimi</a></li>
+                <li><a href="/Admin/MusteriYonetimi.aspx">Müşteri Yönetimi</a></li>
+                <li><a href="/Admin/SiparisYonetimi.aspx">Sipariş Yönetimi</a></li>
+                <li><a href="/Admin/UrunYonetimi.aspx">Ürün Yönetimi</a></li>
+                <li>
+                    <asp:LinkButton ID="lbCikis" runat="server" OnClick="lbCikis_Click" OnClientClick="return (confirm('Çıkış yapmak istediğinizden emin misiniz?'))" ValidationGroup="cikis">Çıkış</asp:LinkButton>
+                </li>
+            </ul>
+            <hr />
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "İletişim";
+}
+
+<div class="container m-5">
+
+    <div class="row">
+        <div class="col">
+
+            <h2>@ViewBag.Title.</h2>
+            <h3>@ViewBag.Message</h3>
+
+            <address>
+                Adresimiz<br />
+                Ataşehir, 98052-6399 Sokak<br />
+                <abbr title="Telefon">P:</abbr>
+                425.555.0100
+            </address>
+
+            <address>
+                <strong>Destek:</strong>   <a href="mailto:destek@example.com">destek@urunyonetimistoktakip.com</a><br />
+                <strong>Pazarlama:</strong> <a href="mailto:Marketing@example.com">Marketing@urunyonetimistoktakip.com</a>
+            </address>
+
+        </div>
+        <div class="col">
+
+            <form method="post" id="iletisim_formu">
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email Adresiniz</label>
+                    <input type="email" name="email" class="form-control" id="Email" aria-describedby="emailHelp">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Adi" class="form-label">Adınız</label>
+                    <input type="text" class="form-control" id="Adi" name="Adi" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Soyadi" class="form-label">Soyadınız</label>
+                    <input type="text" class="form-control" id="Soyadi" name="Soyadi" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Mesaj" class="form-label">Mesajınız</label>
+                    <textarea class="form-control" id="Mesaj" name="Mesaj" rows="3" required></textarea>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="iletisim_formu()">Gönder</button>
+
+            </form>
+
+        </div>
+    </div>
+    <div class="alert alert-success" id="sonuc" style="display:none"></div>
+    @{
+        if (IsPost)
+        {
+            if (TempData["Mesaj"] != null)
+            {
+                <hr />
+                <div class="alert alert-info">@TempData["Mesaj"]</div>
+            }
+        }
+    }
+
+</div>
+
+@section scripts{
+    <script>
+        function iletisim_formu() {
+            var email = $("#Email").val();
+            var adi = $("#Adi").val();
+            var soyadi = $("#Soyadi").val();
+            var mesaj = $("#Mesaj").val();
+
+            var message = {
+                "email": email,
+                "adi": adi,
+                "soyadi": soyadi,
+                "mesaj": mesaj
+            };
+
+            $.ajax({
+                method: "POST",
+                url: "/Home/Contact",
+                type: "json",
+                data: message,
+                success: function (data) {
+                    document.getElementById("iletisim_formu").reset();
+                    $("#sonuc").show().html("Mesajınız Gönderildi!").delay("5000").fadeOut();
+                },
+                error: function (err) {
+                    alert("Hata Oluştu!");
+                }
+
+            });
+        }
+    </script>
+}
